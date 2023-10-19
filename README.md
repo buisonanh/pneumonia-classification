@@ -6,10 +6,9 @@
   3. [Preprocess Data](#preprocess)<br>
   4. [Visualize Data](#visualize)<br>
   5. [Neural Network](#neural-network)<br>
-  6. [Logistic Regression](#logistic-regression)<br>
-  7. [Support Vector Machines (SVM)](#svm)<br>
-  8. [Testing](#testing)<br>
-  9. [Summary](#summary)
+  6. [Model Training](#model-train)<br>
+  7. [Model Evaluation](#model-evaluation)<br>
+  8. [Prediction and Visualization](#predict-visualize)<br>
 
 ## <a name="introduction"> Introduction</a>
 This project aims to develop a Convolutional Neural Network (CNN) for accurately classifying chest X-ray images for the presence of pneumonia. The goal is to build a model capable of distinguishing between normal and pneumonia-affected X-ray images. The project is divided into various key sections, including data loading, data preprocessing, neural network architecture, model training, evaluation, and result visualization.
