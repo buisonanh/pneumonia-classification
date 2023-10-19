@@ -19,10 +19,12 @@ The project begins by loading the dataset using the "keremberke/chest-xray-class
 
 ## <a name="preprocess"> Preprocess Data</a>
 Data preprocessing is a critical step before training the CNN model. The following steps are performed to preprocess the X-ray images:
+
 1. Open and resize the image to 28x28 pixels.
 2. Convert the image to grayscale.
 3. Convert the image to a NumPy array and reshape it to (28, 28, 1).
 4. Normalize pixel values to the range [0, 1].
+
 The preprocessed data is then divided into three sets: training, validation, and test sets. Images and their corresponding labels are stored in separate arrays.
 
 
@@ -40,52 +42,11 @@ A CNN model is defined using TensorFlow's Keras API. The model architecture incl
 
 The model is compiled with a loss function, an optimizer, and accuracy as a monitoring metric.
 
-## <a name="logistic-regression"> Logistic Regression
-The Logistic Regression model is employed with optimized parameters obtained through grid search. The model is trained using the training set and subsequently tested on the test set. The model's performance is assessed based on accuracy, F1 score, and Jaccard score, providing insights into its effectiveness in phishing URL detection.
-```python
-logreg = LogisticRegression(C= 0.01, class_weight= 'balanced', max_iter= 500, penalty= 'l2', random_state=42)
-lr_lbfgs = logreg.fit(x_train,y_train)
+## <a name="model-train"> Model Training</a>
+The CNN model is trained using the training data. The training process involves specifying the number of epochs and using the validation data for monitoring the model's performance. The training history is stored in the history variable.
 
-y_pred_lr=logreg.predict(x_test)
-```
-The accuracy, scores, and confusion matrix of the prediction are as follows:
-- Accuracy: 0.9843
-- F1 score: 0.9842
-- Jaccard score: 0.9691
+## <a name="model-evaluation"> Model Evaluation</a>
 
-![EDA Image](imgs/confusion-matrix-lr.png)
 
-## <a name="svm"> Support Vector Machines (SVM)</a>
-In addition to Logistic Regression, Support Vector Machines (SVM) are used as an alternative machine learning model for phishing URL detection. The SVM model is trained and evaluated similarly to Logistic Regression, allowing for a comparison of their performance.
-```python
-clf = svm.SVC()
-clf_md = clf.fit(x_train, y_train)
+## <a name="predict-visualize"> Prediction and Visualization</a>
 
-y_pred_svm = clf.predict(x_test)
-```
-The accuracy, scores, and confusion matrix of the prediction are as follows:
-- Accuracy: 0.9968
-- F1 score: 0.9968
-- Jaccard score: 0.9936
-
-![EDA Image](imgs/confusion-matrix-svm.png)
-
-## <a name="testing"> Testing</a>
-The trained models are put to the test using an external dataset containing URLs with their corresponding labels. Feature extraction is applied to this dataset, and both the Logistic Regression and SVM models are used to make predictions. The performance of the models on this test dataset is evaluated, providing an assessment of their real-world applicability.
-
-The TEST accuracy, scores, and confusion matrix of the prediction by <strong>Logistic Regression</strong> model are as follows:
-- Jaccard score: 0.05
-- Accuracy: 0.49
-- F1 score: 0.65
-
-![EDA Image](imgs/confusion-matrix-lr-test.png)
-
-The TEST accuracy, scores, and confusion matrix of the prediction by <strong>SVM</strong> model are as follows:
-- Jaccard score: 0.05
-- Accuracy: 0.49
-- F1 score: 0.65
-
-![EDA Image](imgs/confusion-matrix-svm-test.png)
-
-## <a name="testing"> Summary</a>
-In summary, this project combines data preprocessing, feature extraction, exploratory data analysis, and machine learning techniques to create an effective phishing URL detection model. The utilization of Logistic Regression and SVM, along with careful feature selection, ensures a robust and reliable solution for identifying potential phishing URLs.
