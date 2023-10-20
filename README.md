@@ -41,6 +41,38 @@ A CNN model is defined using TensorFlow's Keras API. The model architecture incl
 
 The model is compiled with a loss function, an optimizer, and accuracy as a monitoring metric.
 
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ conv2d (Conv2D)             (None, 26, 26, 64)        640       
+                                                                 
+ max_pooling2d (MaxPooling2  (None, 13, 13, 64)        0         
+ D)                                                              
+                                                                 
+ conv2d_1 (Conv2D)           (None, 11, 11, 64)        36928     
+                                                                 
+ max_pooling2d_1 (MaxPoolin  (None, 5, 5, 64)          0         
+ g2D)                                                            
+                                                                 
+ flatten (Flatten)           (None, 1600)              0         
+                                                                 
+ L1 (Dense)                  (None, 256)               409856    
+                                                                 
+ L2 (Dense)                  (None, 128)               32896     
+                                                                 
+ L3 (Dense)                  (None, 64)                8256      
+                                                                 
+ L4 (Dense)                  (None, 32)                2080      
+                                                                 
+ L5 (Dense)                  (None, 16)                528       
+                                                                 
+ L6 (Dense)                  (None, 2)                 34        
+                                                                 
+=================================================================
+Total params: 491218 (1.87 MB)
+Trainable params: 491218 (1.87 MB)
+Non-trainable params: 0 (0.00 Byte)
+
 ## <a name="model-train"> Model Training</a>
 The CNN model is trained using the training data. The training process involves specifying the number of epochs and using the validation data for monitoring the model's performance. The training history is stored in the history variable.
 
