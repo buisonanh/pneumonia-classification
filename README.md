@@ -14,7 +14,7 @@
 This project aims to develop a Convolutional Neural Network (CNN) for accurately classifying chest X-ray images for the presence of pneumonia. The goal is to build a model capable of distinguishing between normal and pneumonia-affected X-ray images. The project is divided into various key sections, including data loading, data preprocessing, neural network architecture, model training, evaluation, and result visualization.
 
 ## <a name="datasets"> Datasets</a>
-The project begins by loading the dataset using the "keremberke/chest-xray-classification" dataset provided through the "datasets" module from Huggingface Community. The dataset comprises training, validation, and test sets. The dataset structure is stored in the variables X and y, where X represents the training data, and y represents the validation data.
+The project begins by loading the dataset using the "keremberke/chest-xray-classification" dataset provided through the "datasets" module from Huggingface Community. The dataset comprises training, validation, and test sets of X-ray images with a size of 640x640 pixels. The dataset structure is stored in the variables X and y, where X represents the training data, and y represents the validation data.
 
 ## <a name="preprocess"> Preprocess Data</a>
 Data preprocessing is a critical step before training the CNN model. The following steps are performed to preprocess the X-ray images:
@@ -33,6 +33,8 @@ A function named visualize_random_data is defined to visualize a random subset o
 
 ## <a name="neural-network"> Neural Network</a>
 A CNN model is defined using TensorFlow's Keras API. The model architecture includes convolutional layers, max-pooling layers, and fully connected (dense) layers. The model consists of several layers:
+
+'''pytho
 
 - Convolutional layers with ReLU activation.
 - Max-pooling layers.
