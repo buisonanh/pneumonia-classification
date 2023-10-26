@@ -3,8 +3,8 @@
 ## Table of Contents
   1. [Introduction](#introduction)<br>
   2. [Datasets](#datasets)<br>
-  3. [Preprocess Data](#preprocess)<br>
-  4. [Visualize Data](#visualize)<br>
+  3. [Exploratory Data Analysis](#eda)<br>
+  4. [Preprocess Data](#preprocess)<br>
   5. [Neural Network](#neural-network)<br>
   6. [Model Training](#model-train)<br>
   7. [Model Evaluation](#model-evaluation)<br>
@@ -16,6 +16,12 @@ This project aims to develop a Convolutional Neural Network (CNN) for accurately
 ## <a name="datasets"> Datasets</a>
 The project begins by loading the dataset using the "keremberke/chest-xray-classification" dataset provided through the "datasets" module from Huggingface Community. The dataset comprises training, validation, and test sets of X-ray images with a size of 640x640 pixels. The dataset structure is stored in the variables X and y, where X represents the training data, and y represents the validation data.
 
+
+## <a name="eda"> Exploratory Data Analysis</a>
+A function named visualize_random_data is defined to visualize a random subset of the training data. This function displays a specified number of images along with their labels.
+
+![EDA Image 1](imgs/label-distribution.png)
+
 ## <a name="preprocess"> Preprocess Data</a>
 Data preprocessing is a critical step before training the CNN model. The following steps are performed to preprocess the X-ray images:
 
@@ -26,10 +32,6 @@ Data preprocessing is a critical step before training the CNN model. The followi
 
 The preprocessed data is then divided into three sets: training, validation, and test sets. Images and their corresponding labels are stored in separate arrays.
 
-
-
-## <a name="visualize"> Visualize Data</a>
-A function named visualize_random_data is defined to visualize a random subset of the training data. This function displays a specified number of images along with their labels.
 
 ## <a name="neural-network"> Neural Network</a>
 A CNN model is defined using TensorFlow's Keras API. The model architecture includes convolutional layers, max-pooling layers, and fully connected (dense) layers. The model consists of several layers:
