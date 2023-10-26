@@ -34,14 +34,37 @@ A function named visualize_random_data is defined to visualize a random subset o
 ## <a name="neural-network"> Neural Network</a>
 A CNN model is defined using TensorFlow's Keras API. The model architecture includes convolutional layers, max-pooling layers, and fully connected (dense) layers. The model consists of several layers:
 
-'''pytho
+```python
+tf.random.set_seed(64)
+model = Sequential(
+    [
+        Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28 ,1)),
+        MaxPooling2D(2, 2),
+        Conv2D(64, (3, 3), activation='relu'),
+        MaxPooling2D(2,2),
+        Flatten(),
+        Dense(256, activation='relu', name='L1'),
+        Dense(128, activation='relu', name='L2'),
+        Dense(64, activation='relu', name='L3'),
+        Dense(32, activation='relu', name='L4'),
+        Dense(16, activation='relu', name='L5'),
+        Dense(2, activation='sigmoid', name='L6')
+    ], name = "my_model"
+)
 
+model.compile(
+    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+    metrics=['accuracy']  # Add accuracy as a metric for monitoring
+)
+```
 - Convolutional layers with ReLU activation.
 - Max-pooling layers.
 - Fully connected (dense) layers with ReLU activation.
 - The output layer with a sigmoid activation function.
 
 The model is compiled with a loss function, an optimizer, and accuracy as a monitoring metric.
+
 
 ## <a name="model-train"> Model Training</a>
 The CNN model is trained using the training data. The training process involves specifying the number of epochs and using the validation data for monitoring the model's performance. The training history is stored in the history variable.
