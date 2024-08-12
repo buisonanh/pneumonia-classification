@@ -110,9 +110,11 @@ The model's performance on the test data is summarized as follows:
 - Test accuracy: 0.95
 
 ![testing image 1](imgs/confusion-matrix.png)
+
 The confusion matrix provides a detailed breakdown of the model's predictions, highlighting true positives, true negatives, false positives, and false negatives, which is crucial for assessing the model's performance in binary classification tasks.
 
 These are some visualized predictions of the model:
+
 ![testing image 2](imgs/test-predictions.png)
 
 
