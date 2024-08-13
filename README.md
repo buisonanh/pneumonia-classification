@@ -4,15 +4,15 @@
   1. [Introduction](#introduction)<br>
   2. [Datasets](#datasets)<br>
   3. [Exploratory Data Analysis](#eda)<br>
-  4. [Preprocess Data](#preprocess)<br>
-  5. [Neural Network](#neural-network)<br>
-  6. [Model Training](#model-train)<br>
-  7. [Model Evaluation](#model-evaluation)<br>
+  4. [Transform Data](#transform)<br>
+  5. [Model](#neural-network)<br>
+  6. [Training](#training)<br>
+  7. [Evaluation](#model-evaluation)<br>
   8. [Prediction and Visualization](#predict-visualize)<br>
   9. [Summary](#summary)<br>
 
 ## <a name="introduction"> Introduction</a>
-This project aims to develop a Convolutional Neural Network (CNN) for accurately classifying chest X-ray images for the presence of pneumonia. The goal is to build a model capable of distinguishing between normal and pneumonia-affected X-ray images. The project is divided into various key sections, including data loading, data preprocessing, neural network architecture, model training, evaluation, and result visualization.
+This project focuses on fine-tuning a pre-trained ResNet-18 model to accurately classify chest X-ray images for the presence of pneumonia. The objective is to leverage the power of transfer learning to develop a model capable of distinguishing between normal and pneumonia-affected X-ray images. The project is organized into several key sections: data loading, data preprocessing, model architecture modification, model training, evaluation, and result visualization.
 
 ## <a name="datasets"> Datasets</a>
 The project begins by loading the dataset using the "keremberke/chest-xray-classification" dataset provided through the "datasets" module from Huggingface Community. The dataset comprises training, validation, and test sets of X-ray images with a size of 640x640 pixels. The dataset structure is stored in the variables X and y, where X represents the training data, and y represents the validation data.
@@ -30,21 +30,20 @@ Dataset Statistics:
 It's worth noting that the class distributions in the dataset are not perfectly balanced. However, through testing and monitoring, it has been observed that this class imbalance may not significantly impact the model's performance and final output.
 
 
-## <a name="preprocess"> Preprocess Data</a>
-Data preprocessing is a critical step before training the CNN model. The following steps are performed to preprocess the X-ray images:
+## <a name="transform"> Transform Data</a>
+Before training the ResNet-18 model, the X-ray images need to be appropriately transformed to fit the model's requirements. The following transformations are applied to the dataset:
 
-1. Open and resize the image to 28x28 pixels.
-2. Convert the image to grayscale.
-3. Convert the image to a NumPy array and reshape it to (28, 28, 1).
-4. Normalize pixel values to the range [0, 1].
+1. Custom Dataset: A custom dataset class is utilized to load and transform the images, ensuring they meet the input requirements of the model.
+2. Grayscale to RGB Conversion: Since ResNet-18 expects RGB images, the grayscale X-ray images are converted to RGB by repeating the single grayscale channel.
+3. Resizing: All images are resized to 224x224 pixels, the standard input size for ResNet-18.
+4. Normalization: The images are normalized using ImageNet mean and standard deviation values to stabilize and improve the training process.
+5. DataLoader Setup: The dataset is split into training, validation, and test sets, with DataLoader objects created to handle batch processing during model training and evaluation.
 
-The preprocessed data is then divided into three sets: training, validation, and test sets. Images and their corresponding labels are stored in separate arrays.
-
-These are some samples of the training set:
+These are some samples of the dataset (training set) after transformation:
 ![EDA Image 2](imgs/visualize-data.png)
 
 
-## <a name="neural-network"> Neural Network</a>
+## <a name="model"> Model (Resnet18 Pre-trained)</a>
 A CNN model is defined using TensorFlow's Keras API. The model architecture includes convolutional layers, max-pooling layers, and fully connected (dense) layers. The model consists of several layers:
 
 ```python
@@ -78,7 +77,7 @@ model.compile(
 The model is compiled with a loss function, an optimizer, and accuracy as a monitoring metric.
 
 
-## <a name="model-train"> Model Training</a>
+## <a name="training"> Training</a>
 To train the model, the following code is executed:
 ```python
 # Train the model and store the training history
