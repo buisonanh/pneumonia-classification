@@ -44,50 +44,43 @@ These are some samples of the dataset (training set) after transformation:
 
 
 ## <a name="model"> Model (Resnet18 Pre-trained)</a>
-A CNN model is defined using TensorFlow's Keras API. The model architecture includes convolutional layers, max-pooling layers, and fully connected (dense) layers. The model consists of several layers:
+In this project, we fine-tune a pre-trained ResNet-18 model to classify chest X-ray images as either normal or pneumonia-affected. ResNet-18 is a popular deep convolutional neural network architecture known for its residual blocks, which help in training very deep networks by mitigating the vanishing gradient problem.
 
+<b>ResNet-18 Architecture</b>
+Below is a visual representation of the ResNet-18 architecture:
+![Resnet18](imgs/resnet-18.png)
+The model consists of several convolutional layers, each followed by a batch normalization layer and a ReLU activation function. The layers are organized into blocks, with shortcut connections that add the input of each block to its output, aiding in the flow of gradients during training.
+
+<b>Model Customization</b>
+
+1. Loading the pre-trained ResNet-18 Model: We start by loading a ResNet-18 model pre-trained on ImageNet.
 ```python
-model = Sequential(
-    [
-        Conv2D(64, (3, 3), activation='relu', input_shape=(28, 28 ,1)),
-        MaxPooling2D(2, 2),
-        Conv2D(64, (3, 3), activation='relu'),
-        MaxPooling2D(2,2),
-        Flatten(),
-        Dense(256, activation='relu', name='L1'),
-        Dense(128, activation='relu', name='L2'),
-        Dense(64, activation='relu', name='L3'),
-        Dense(32, activation='relu', name='L4'),
-        Dense(16, activation='relu', name='L5'),
-        Dense(2, activation='sigmoid', name='L6')
-    ], name = "my_model"
-)
-
-model.compile(
-    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-    optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
-    metrics=['accuracy']  # Add accuracy as a metric for monitoring
-)
+resnet18 = models.resnet18(pretrained=True)
 ```
-- Convolutional layers with ReLU activation.
-- Max-pooling layers.
-- Fully connected (dense) layers with ReLU activation.
-- The output layer with a sigmoid activation function.
 
-The model is compiled with a loss function, an optimizer, and accuracy as a monitoring metric.
+2. Adjusting the Output Layer: The final fully connected layer is modified to output two classes, suitable for the binary classification task.
+```python
+num_features = resnet18.fc.in_features
+resnet18.fc = nn.Linear(num_features, 2)
+```
+
+3. Freezing Layers
+In the ResNet-18 architecture, we freeze the initial layers up to the layer3 block to use the model as a feature extractor. Only the deeper layers (layer4 and fc) are left unfrozen to allow fine-tuning on the pneumonia dataset.
+```python
+# Freeze the initial layers to use ResNet-18 purely as a feature extractor
+for param in resnet18.parameters():
+    param.requires_grad = False
+
+# Unfreeze the last few layers
+for param in resnet18.layer4.parameters():
+    param.requires_grad = True
+```
+
+These adjustments allow the ResNet-18 model to effectively learn from the pneumonia dataset while leveraging its pre-trained weights for optimal performance.
 
 
 ## <a name="training"> Training</a>
-To train the model, the following code is executed:
-```python
-# Train the model and store the training history
-history = model.fit(
-    X_train, y_train,
-    epochs=20,
-    validation_data=(X_validation, y_validation)  # Use validation data for monitoring
-)
-```
-This code snippet trains the defined model on the training data for 20 epochs while monitoring its performance using the validation data. The training history is stored for further analysis and evaluation.
+
 
 
 ## <a name="model-evaluation"> Model Evaluation</a>
