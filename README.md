@@ -210,3 +210,10 @@ These are some visualized predictions of the model:
 ## <a name="summary"> Summary</a>
 In this project, I successfully fine-tuned a pre-trained ResNet-18 model to classify chest X-ray images for pneumonia detection. By transforming grayscale X-ray images into RGB format, resizing them to 224x224 pixels, and normalizing them according to ImageNet standards, I adapted the dataset to the model’s requirements. I froze the early layers of ResNet-18 to leverage its pre-trained features while fine-tuning the deeper layers for our specific task. The model achieved a high test accuracy of approximately 97.6%, demonstrating its effectiveness in distinguishing between normal and pneumonia-affected images. This project underscores the potential of using transfer learning and CNNs for reliable medical image classification.
 
+
+## <a> Citation<a/>
+Kerem (2023). chest-xray-classification. [online] Huggingface.co. Available at: https://huggingface.co/datasets/keremberke/chest-xray-classification [Accessed 13 Aug. 2024].
+
+He, K., Zhang, X., Ren, S. and Sun, J. (2015). Deep Residual Learning for Image Recognition. [online] arXiv.org. Available at: https://arxiv.org/abs/1512.03385.
+
+Ramzan, F., Khan, M.U.G., Rehmat, A., Iqbal, S., Saba, T., Rehman, A. and Mehmood, Z. (2019). A Deep Learning Approach for Automated Diagnosis and Multi-Class Classification of Alzheimer’s Disease Stages Using Resting-State fMRI and Residual Neural Networks. Journal of Medical Systems, 44(2). doi:https://doi.org/10.1007/s10916-019-1475-2.
