@@ -44,7 +44,7 @@ These are some samples of the dataset (training set) after transformation:
 ![EDA Image 2](imgs/visualize-data.png)
 
 
-## <a name="model"> Model (Resnet18 Pre-trained)</a>
+## <a name="model"> Model (Resnet18 pre-trained)</a>
 In this project, I fine-tune a pre-trained ResNet-18 model to classify chest X-ray images as either normal or pneumonia-affected. ResNet-18 is a popular deep convolutional neural network architecture known for its residual blocks, which help in training very deep networks by mitigating the vanishing gradient problem.
 
 <b>ResNet-18 Architecture</b>
